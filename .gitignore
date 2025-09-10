@@ -1,0 +1,8 @@
+.python-version
+.env
+jobs/*.json
+uploads/*.png
+excel_uploads/*.xlsx
+weaviate*
+config.toml
+poetry.lock

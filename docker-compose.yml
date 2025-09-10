@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    command: uvicorn emailer.main:app --host 0.0.0.0 --port 8000
+    ports:
+    - 8000:8000
+    restart: unless-stopped
+    environment:
+      PORT: 8000
+      TZ: Europe/Berlin
+    volumes:
+      - ./config.toml:/app/config.toml:ro
+      - ./tinymce-dist:/app/tinymce-dist:ro
+      - ./uploads:/app/uploads
+      - ./excel_uploads:/app/excel_uploads
+      - ./jobs:/app/jobs
