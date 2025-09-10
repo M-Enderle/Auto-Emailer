@@ -7,12 +7,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 import toml
 
 
-class DatabaseSettings(BaseSettings):
-    """Database configuration settings."""
-    original_path: str = Field(..., description="Path to the original database file")
-    model_config = SettingsConfigDict(env_prefix="DB_")
-
-
 class MailAccountSettings(BaseSettings):
     """Single mail account credentials."""
     # Support typo 'adress' from TOML via validation alias
@@ -45,7 +39,6 @@ class SchedulerSettings(BaseSettings):
 
 class Settings(BaseSettings):
     """Main application settings loaded from TOML configuration."""
-    database: DatabaseSettings
     mail: MailSettings
     scheduler: SchedulerSettings = Field(default_factory=SchedulerSettings)
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
@@ -86,12 +79,6 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Get the global settings instance."""
     return Settings.from_toml()
-
-
-# Convenience function for getting database settings
-def get_database_settings() -> DatabaseSettings:
-    """Get database settings from the global configuration."""
-    return get_settings().database
 
 
 # Convenience function for getting genai settings

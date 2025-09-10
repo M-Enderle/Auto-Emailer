@@ -1,10 +1,8 @@
 """Utility modules for the emailer package."""
 
-from .settings import Settings, DatabaseSettings, get_settings, get_database_settings
+from .settings import Settings, get_settings
 
 __all__ = [
     "Settings",
-    "DatabaseSettings", 
-    "get_settings",
-    "get_database_settings"
+    "get_settings"
 ] 
